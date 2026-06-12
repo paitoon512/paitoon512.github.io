@@ -177,6 +177,53 @@ footer p{font-size:0.7rem;color:#3A3A34;letter-spacing:0.06em}
 }
 @media(max-width:480px){.cert-cards{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.section{opacity:1;transform:none;transition:none}#bg-canvas{display:none}}
+
+/* JOB CARDS */
+.job-card{background:var(--white);border:1px solid var(--rule);border-radius:5px;margin-bottom:1rem;overflow:hidden;transition:box-shadow 0.25s}
+.job-card:hover{box-shadow:0 4px 20px rgba(26,107,74,0.08)}
+.job-card-top{padding:1.6rem 1.8rem;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;user-select:none}
+.job-card-left{flex:1}
+.jc-period{font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem}
+.jc-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--ink);margin-bottom:0.2rem}
+.jc-company{margin-bottom:0.8rem}
+.jc-link{font-size:0.78rem;font-weight:500;color:var(--emerald);text-decoration:none;border-bottom:1px solid rgba(26,107,74,0.25);padding-bottom:1px;transition:border-color 0.2s}
+.jc-link:hover{border-color:var(--emerald)}
+.jc-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.jc-tag{font-size:0.68rem;font-weight:400;background:var(--surface);color:var(--ink);padding:0.2rem 0.6rem;border-radius:2px;border:1px solid var(--rule)}
+.jc-toggle{font-size:1.3rem;color:var(--muted);transition:all 0.3s;flex-shrink:0;margin-top:0.1rem;width:28px;text-align:center}
+.jc-toggle.open{transform:rotate(45deg);color:var(--emerald)}
+
+/* IMPACT STRIP */
+.jc-impact{display:flex;flex-wrap:wrap;border-top:1px solid var(--rule);background:var(--surface)}
+.jc-imp-item{flex:1;min-width:120px;padding:1.2rem 1.4rem;border-right:1px solid var(--rule);position:relative;overflow:hidden}
+.jc-imp-item:last-child{border-right:none}
+.jc-imp-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--emerald),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.job-card:hover .jc-imp-item::after{transform:scaleX(1)}
+.jc-imp-num{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:var(--ink);line-height:1;margin-bottom:0.25rem}
+.jc-imp-num sup{font-size:0.8rem;color:var(--emerald);vertical-align:super}
+.jc-imp-lbl{font-size:0.68rem;color:var(--muted);line-height:1.4}
+
+/* STORY BODY */
+.jc-body{display:none;border-top:1px solid var(--rule);padding:1.5rem 1.8rem}
+.jc-body.open{display:block;animation:fadeIn 0.25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.jc-story{display:flex;flex-direction:column;gap:0}
+.jc-step{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px dashed var(--rule)}
+.jc-step:last-child{border-bottom:none;padding-bottom:0}
+.jc-step-icon{flex-shrink:0;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.95rem;margin-top:0.1rem}
+.jc-step-icon.problem{background:#FEF0EA;color:#C44B0A}
+.jc-step-icon.action{background:rgba(26,107,74,0.1);color:var(--emerald)}
+.jc-step-icon.result{background:rgba(184,150,110,0.12);color:#7A5C30}
+.jc-step-lbl{font-size:0.6rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem}
+.jc-step-text{font-size:0.86rem;color:#3A3A30;line-height:1.75;font-weight:300}
+.jc-step-text strong{font-weight:600;color:var(--emerald)}
+
+@media(max-width:600px){
+  .jc-impact{flex-direction:column}
+  .jc-imp-item{border-right:none;border-bottom:1px solid var(--rule)}
+  .jc-imp-item:last-child{border-bottom:none}
+  .job-card-top{flex-direction:column}
+}
 </style>
 </head>
 <body>
@@ -186,8 +233,9 @@ footer p{font-size:0.7rem;color:#3A3A34;letter-spacing:0.06em}
     <a href="#hero" class="logo">Paitoon <em>N.</em></a>
     <ul>
       <li><a href="#impact">Impact</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li class="nav-dd">
-        <span class="nav-dd-btn">Experience ▾</span>
+        <span class="nav-dd-btn">Work ▾</span>
         <div class="nav-dd-menu">
           <a href="krungsri.html"><span class="dd-name">Krungsri Auto</span><span class="dd-year">2023–Now</span></a>
           <a href="pttgc.html"><span class="dd-name">PTTGC</span><span class="dd-year">2022–2023</span></a>
@@ -246,71 +294,188 @@ footer p{font-size:0.7rem;color:#3A3A34;letter-spacing:0.06em}
 <!-- EXPERIENCE -->
 <div id="experience" class="section">
   <p class="section-label">Experience</p>
+  <p style="font-size:0.88rem;color:var(--muted);font-weight:300;margin-bottom:2rem;line-height:1.7">กดที่แต่ละ role เพื่ออ่านรายละเอียด — ปัญหา, สิ่งที่ทำ, และผลลัพธ์</p>
 
-  <div class="job">
-    <div class="job-top"><span class="job-title">Senior Data Engineer</span><span class="job-date">2023 — Present</span></div>
-    <div class="job-company">Ayudhya Capital Auto Lease PCL (Krungsri Auto) · DDO</div>
-    <ul class="job-list">
-      <li>Served as the sole owner of incentive program design and calculation across 3 sales channels in the consumer lending business, covering end-to-end incentive logic, data pipeline maintenance, and performance reporting.</li>
-      <li>Designed and maintained end-to-end ETL data pipelines on AWS (S3, Lambda, Glue, Redshift) and Oracle, ensuring reliable and scalable data flow across systems.</li>
-      <li>Optimized AWS Glue ETL jobs across 3 data pipelines, reducing execution time from several hours to under 3 minutes — a ~95% reduction in processing time per run.</li>
-      <li>Redesigned S3 storage strategy by consolidating high-frequency micro-files into hourly partitions, reducing daily file count by over 90%, significantly improving query performance and storage cost efficiency.</li>
-      <li>Implemented near real-time ETL processing to support time-sensitive business operations and reporting needs.</li>
-      <li>Developed executive-level dashboards and reports using Tableau and Power BI to support real-time decision-making.</li>
-      <li>Led quarterly project planning by translating annual goals into actionable execution plans, setting milestones, and tracking delivery progress.</li>
-      <li>Monitored data pipeline performance through automated testing and alert systems to proactively address issues.</li>
-      <li>Created detailed documentation of data architecture and processes to support team knowledge sharing.</li>
-    </ul>
-    <a href="krungsri.html" class="view-story">อ่านเรื่องราวเต็ม — Krungsri Auto →</a>
+  <!-- ─── KRUNGSRI AUTO ─── -->
+  <div class="job-card">
+    <div class="job-card-top" onclick="toggleJob('j1',this)">
+      <div class="job-card-left">
+        <div class="jc-period">2023 — Present</div>
+        <div class="jc-title">Senior Data Engineer</div>
+        <div class="jc-company"><a href="krungsri.html" class="jc-link" onclick="event.stopPropagation()">Ayudhya Capital Auto Lease PCL (Krungsri Auto) · DDO ↗</a></div>
+        <div class="jc-tags">
+          <span class="jc-tag">AWS</span><span class="jc-tag">Redshift</span><span class="jc-tag">Terraform</span><span class="jc-tag">Oracle</span><span class="jc-tag">GoCD</span>
+        </div>
+      </div>
+      <div class="jc-toggle" id="tog-j1">+</div>
+    </div>
+    <div class="jc-impact">
+      <div class="jc-imp-item"><div class="jc-imp-num">95<sup>%</sup></div><div class="jc-imp-lbl">ลดเวลาประมวลผลข้อมูล จากชั่วโมงเหลือ 3 นาที</div></div>
+      <div class="jc-imp-item"><div class="jc-imp-num">90<sup>%+</sup></div><div class="jc-imp-lbl">ลดจำนวนไฟล์ใน Storage ประหยัดต้นทุน</div></div>
+      <div class="jc-imp-item"><div class="jc-imp-num">5<sup>+</sup></div><div class="jc-imp-lbl">Pipeline ที่รับผิดชอบตั้งแต่ออกแบบจนถึง Production</div></div>
+      <div class="jc-imp-item"><div class="jc-imp-num">3</div><div class="jc-imp-lbl">ช่องทางขายที่ระบบ Incentive ครอบคลุม</div></div>
+    </div>
+    <div class="jc-body" id="body-j1">
+      <div class="jc-story">
+        <div class="jc-step">
+          <div class="jc-step-icon problem">⚠</div>
+          <div><div class="jc-step-lbl">ปัญหา</div><div class="jc-step-text">ระบบคำนวณ Incentive ใช้เวลา <strong>~92 นาทีต่อรอบ</strong> และมีไฟล์ข้อมูลสะสมจำนวนมากจนทำให้ระบบช้า ต้นทุน Storage สูง และรายงานล่าช้า</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon action">⚙</div>
+          <div><div class="jc-step-lbl">สิ่งที่ทำ</div><div class="jc-step-text">ออกแบบและสร้าง AWS Pipeline ใหม่ตั้งแต่ต้น — ปรับ Glue ETL, แก้ SQS batch sizing, ออกแบบ S3 partition ใหม่เป็น hourly, และสร้าง Infrastructure ด้วย Terraform ครบวงจร</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon result">✓</div>
+          <div><div class="jc-step-lbl">ผลลัพธ์</div><div class="jc-step-text">เวลาลด <strong>95%</strong> เหลือไม่ถึง 3 นาที, ไฟล์ใน S3 ลด <strong>90%+</strong>, ผู้บริหารได้ Dashboard real-time ผ่าน Tableau และ Power BI</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="job">
-    <div class="job-top"><span class="job-title">Senior Data Engineer</span><span class="job-date">2022 — 2023</span></div>
-    <div class="job-company">PTT Global Chemical Public Company Limited (PTTGC)</div>
-    <ul class="job-list">
-      <li>Designed and developed robust data pipelines to facilitate seamless data integration and transformation processes.</li>
-      <li>Bridged business and technical teams by translating business requirements into logic-based data flow conditions, enabling accurate and responsive pipeline processing.</li>
-      <li>Collaborated in end-to-end pipeline design, ensuring seamless data integration and alignment with business objectives.</li>
-      <li>Conducted impact analysis to validate data integrity and consistency following pipeline execution.</li>
-    </ul>
-    <a href="pttgc.html" class="view-story">อ่านเรื่องราวเต็ม — PTTGC →</a>
+  <!-- ─── PTTGC ─── -->
+  <div class="job-card">
+    <div class="job-card-top" onclick="toggleJob('j2',this)">
+      <div class="job-card-left">
+        <div class="jc-period">2022 — 2023</div>
+        <div class="jc-title">Senior Data Engineer</div>
+        <div class="jc-company"><a href="pttgc.html" class="jc-link" onclick="event.stopPropagation()">PTT Global Chemical PCL (PTTGC) ↗</a></div>
+        <div class="jc-tags">
+          <span class="jc-tag">Data Pipeline</span><span class="jc-tag">Integration</span><span class="jc-tag">Business Analysis</span>
+        </div>
+      </div>
+      <div class="jc-toggle" id="tog-j2">+</div>
+    </div>
+    <div class="jc-impact">
+      <div class="jc-imp-item"><div class="jc-imp-num">E2E</div><div class="jc-imp-lbl">ออกแบบ Pipeline ครบตั้งแต่ต้นจนจบ</div></div>
+      <div class="jc-imp-item"><div class="jc-imp-num">100<sup>%</sup></div><div class="jc-imp-lbl">ความถูกต้องข้อมูลหลัง Execution</div></div>
+    </div>
+    <div class="jc-body" id="body-j2">
+      <div class="jc-story">
+        <div class="jc-step">
+          <div class="jc-step-icon problem">⚠</div>
+          <div><div class="jc-step-lbl">ปัญหา</div><div class="jc-step-text">ทีม Business มี Requirement ซับซ้อน ยากสื่อสารกับทีม Technical ทำให้ Pipeline ที่สร้างขึ้นมักไม่ตรงกับ Business Logic จริง</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon action">⚙</div>
+          <div><div class="jc-step-lbl">สิ่งที่ทำ</div><div class="jc-step-text">เป็นสะพานเชื่อมระหว่างทีม Business และ Technical — แปลง Requirement เป็น Logic-based data flow, ออกแบบ Pipeline ครบ E2E, และทำ Impact Analysis หลัง Execute เพื่อยืนยันความถูกต้อง</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon result">✓</div>
+          <div><div class="jc-step-lbl">ผลลัพธ์</div><div class="jc-step-text">Pipeline ตรงตาม Business Objective ของ PTTGC ข้อมูลถูกต้องและสอดคล้องกับ Business Process จริง ลด Gap ระหว่างสองทีม</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="job">
-    <div class="job-top"><span class="job-title">Data Engineer &amp; Business Analyst</span><span class="job-date">2021 — 2022</span></div>
-    <div class="job-company">Extend IT Resource · PTG Energy PCL</div>
-    <ul class="job-list">
-      <li>Designed and implemented Big Data Architecture using Talend, Hadoop, Spark, and Snowflake to enable scalable, high-performance data processing.</li>
-      <li>Built ETL pipelines leveraging the ELK Stack (Elasticsearch, Logstash, Kibana) for real-time data ingestion, transformation, and visualization.</li>
-      <li>Led the development of a Talend Data Management platform, supporting enterprise-wide data integration and governance.</li>
-      <li>Executed large-scale data migration projects using ETL processes.</li>
-      <li>Key client: PTG Energy PCL — deployed on-site as a vendor data engineer to support Big Data architecture and pipeline integration.</li>
-    </ul>
-    <a href="ptgenergy.html" class="view-story">อ่านเรื่องราวเต็ม — PTG Energy →</a>
+  <!-- ─── PTG ENERGY ─── -->
+  <div class="job-card">
+    <div class="job-card-top" onclick="toggleJob('j3',this)">
+      <div class="job-card-left">
+        <div class="jc-period">2021 — 2022</div>
+        <div class="jc-title">Data Engineer & Business Analyst</div>
+        <div class="jc-company"><a href="ptgenergy.html" class="jc-link" onclick="event.stopPropagation()">Extend IT Resource · Vendor PTG Energy PCL ↗</a></div>
+        <div class="jc-tags">
+          <span class="jc-tag">Talend</span><span class="jc-tag">Hadoop</span><span class="jc-tag">Spark</span><span class="jc-tag">Snowflake</span><span class="jc-tag">ELK Stack</span>
+        </div>
+      </div>
+      <div class="jc-toggle" id="tog-j3">+</div>
+    </div>
+    <div class="jc-impact">
+      <div class="jc-imp-item"><div class="jc-imp-num">10<sup>+</sup></div><div class="jc-imp-lbl">Talend Certification Modules</div></div>
+      <div class="jc-imp-item"><div class="jc-imp-num">Real-time</div><div class="jc-imp-lbl">Pipeline ด้วย ELK Stack</div></div>
+      <div class="jc-imp-item"><div class="jc-imp-num">Big Data</div><div class="jc-imp-lbl">Architecture ระดับองค์กร</div></div>
+    </div>
+    <div class="jc-body" id="body-j3">
+      <div class="jc-story">
+        <div class="jc-step">
+          <div class="jc-step-icon problem">⚠</div>
+          <div><div class="jc-step-lbl">ปัญหา</div><div class="jc-step-text">PTG Energy มีข้อมูลจำนวนมากจากหลาย Source แต่ขาดสถาปัตยกรรมที่รองรับ Big Data และต้องการระบบที่มองเห็นข้อมูลแบบ Real-time</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon action">⚙</div>
+          <div><div class="jc-step-lbl">สิ่งที่ทำ</div><div class="jc-step-text">ออกแบบ Big Data Architecture ด้วย Talend, Hadoop, Spark และ Snowflake, สร้าง Real-time Pipeline ด้วย ELK Stack, และพัฒนา Talend Platform สำหรับ Data Governance ระดับองค์กร</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon result">✓</div>
+          <div><div class="jc-step-lbl">ผลลัพธ์</div><div class="jc-step-text">PTG Energy มีสถาปัตยกรรม Big Data ที่รองรับการขยายตัว, ข้อมูล Real-time พร้อมใช้ผ่าน Kibana Dashboard, ได้รับ <strong>Talend Certification ครบ 10+ Module</strong></div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="job">
-    <div class="job-top"><span class="job-title">Data Engineer &amp; Business Analyst</span><span class="job-date">2020 — 2021</span></div>
-    <div class="job-company">Advanced Info Services PCL (AIS)</div>
-    <ul class="job-list">
-      <li>Developed and maintained ETL processes to extract data files and load into databases on Linux environments, enabling reliable data integration.</li>
-      <li>Managed data transfer pipelines to Data Lake, ensuring accurate, timely, and secure ingestion for analytics and reporting.</li>
-      <li>Created and maintained data validation and monitoring reports using Tableau, supporting business teams in verifying data integrity.</li>
-    </ul>
-    <a href="ais.html" class="view-story">อ่านเรื่องราวเต็ม — AIS →</a>
+  <!-- ─── AIS ─── -->
+  <div class="job-card">
+    <div class="job-card-top" onclick="toggleJob('j4',this)">
+      <div class="job-card-left">
+        <div class="jc-period">2020 — 2021</div>
+        <div class="jc-title">Data Engineer & Business Analyst</div>
+        <div class="jc-company"><a href="ais.html" class="jc-link" onclick="event.stopPropagation()">Advanced Info Services PCL (AIS) ↗</a></div>
+        <div class="jc-tags">
+          <span class="jc-tag">ETL</span><span class="jc-tag">Data Lake</span><span class="jc-tag">Linux</span><span class="jc-tag">Tableau</span>
+        </div>
+      </div>
+      <div class="jc-toggle" id="tog-j4">+</div>
+    </div>
+    <div class="jc-impact">
+      <div class="jc-imp-item"><div class="jc-imp-num">Data Lake</div><div class="jc-imp-lbl">Pipeline ส่งข้อมูลเข้า Data Lake ถูกต้อง ตรงเวลา</div></div>
+      <div class="jc-imp-item"><div class="jc-imp-num">Auto</div><div class="jc-imp-lbl">ลดงาน Manual ด้วย Internal Tools</div></div>
+    </div>
+    <div class="jc-body" id="body-j4">
+      <div class="jc-story">
+        <div class="jc-step">
+          <div class="jc-step-icon problem">⚠</div>
+          <div><div class="jc-step-lbl">ปัญหา</div><div class="jc-step-text">AIS ต้องการระบบดึงข้อมูลจากหลายแหล่งส่งเข้า Data Lake อย่างถูกต้องและตรงเวลา พร้อมระบบตรวจสอบคุณภาพที่ทีม Business เข้าใจได้</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon action">⚙</div>
+          <div><div class="jc-step-lbl">สิ่งที่ทำ</div><div class="jc-step-text">พัฒนา ETL บน Linux, สร้าง Pipeline ส่งข้อมูลเข้า Data Lake, พัฒนา Internal Tool ด้วย PHP + Shell Script เพื่อลดงาน Manual, และสร้าง Validation Dashboard ด้วย Tableau</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon result">✓</div>
+          <div><div class="jc-step-lbl">ผลลัพธ์</div><div class="jc-step-text">ทีม Analytics มีข้อมูลถูกต้อง ครบถ้วน พร้อมใช้ใน Data Lake ทีม Business ตรวจสอบคุณภาพข้อมูลด้วยตัวเองผ่าน Tableau Dashboard</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="job">
-    <div class="job-top"><span class="job-title">Data Scientist &amp; Analytics Intern</span><span class="job-date">2020</span></div>
-    <div class="job-company">Government Big Data Institute (GBDi)</div>
-    <ul class="job-list">
-      <li>Designed interactive KPI dashboards using Tableau and Power BI for cross-functional teams.</li>
-      <li>Supported data models and business analysis across multiple government data initiatives.</li>
-    </ul>
-    <a href="gbdi.html" class="view-story">อ่านเรื่องราวเต็ม — GBDi →</a>
+  <!-- ─── GBDi ─── -->
+  <div class="job-card">
+    <div class="job-card-top" onclick="toggleJob('j5',this)">
+      <div class="job-card-left">
+        <div class="jc-period">2020 (Internship)</div>
+        <div class="jc-title">Data Scientist & Analytics Intern</div>
+        <div class="jc-company"><a href="gbdi.html" class="jc-link" onclick="event.stopPropagation()">Government Big Data Institute (GBDi) ↗</a></div>
+        <div class="jc-tags">
+          <span class="jc-tag">Tableau</span><span class="jc-tag">Power BI</span><span class="jc-tag">KPI Dashboard</span>
+        </div>
+      </div>
+      <div class="jc-toggle" id="tog-j5">+</div>
+    </div>
+    <div class="jc-impact">
+      <div class="jc-imp-item"><div class="jc-imp-num">KPI</div><div class="jc-imp-lbl">Dashboard สำหรับหน่วยงานรัฐ</div></div>
+      <div class="jc-imp-item"><div class="jc-imp-num">First</div><div class="jc-imp-lbl">จุดเริ่มต้นสายงาน Data</div></div>
+    </div>
+    <div class="jc-body" id="body-j5">
+      <div class="jc-story">
+        <div class="jc-step">
+          <div class="jc-step-icon problem">⚠</div>
+          <div><div class="jc-step-lbl">ปัญหา</div><div class="jc-step-text">หน่วยงานรัฐต้องการเครื่องมือช่วยให้ผู้บริหารเห็น KPI และ Performance ของโครงการต่างๆ ได้อย่างชัดเจนและรวดเร็ว</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon action">⚙</div>
+          <div><div class="jc-step-lbl">สิ่งที่ทำ</div><div class="jc-step-text">ออกแบบ Interactive Dashboard แสดง KPI และ Performance Trend ด้วย Tableau และ Power BI, สนับสนุน Data Model และ Business Analysis ร่วมกับหลายทีม</div></div>
+        </div>
+        <div class="jc-step">
+          <div class="jc-step-icon result">✓</div>
+          <div><div class="jc-step-lbl">ผลลัพธ์</div><div class="jc-step-text">ผู้บริหารหน่วยงานรัฐมี Dashboard ใช้งานง่าย ติดตาม KPI แบบ Real-time และเป็นจุดเริ่มต้นของเส้นทาง Data Engineering ที่ต่อยอดมาถึงปัจจุบัน</div></div>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>
-
+<!-- SKILLS -->
 <!-- SKILLS -->
 <div id="skills" class="section">
   <p class="section-label">Skills &amp; Stack</p>
@@ -418,6 +583,14 @@ footer p{font-size:0.7rem;color:#3A3A34;letter-spacing:0.06em}
 })();
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});},{threshold:0.06});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+
+function toggleJob(id, topEl) {
+  const body = document.getElementById('body-' + id);
+  const tog = document.getElementById('tog-' + id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  tog.classList.toggle('open', !isOpen);
+}
 </script>
 </body>
 </html>
