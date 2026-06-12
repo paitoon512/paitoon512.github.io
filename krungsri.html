@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krungsri Auto — Paitoon N.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--em:#1A6B4A;--em2:#2A8A60;--em3:#3DAA78;--gold:#B8966E;--ink:#0D0D0D;--muted:#7A7A6A;--rule:#D8D2C4;--bg:#F0EBE0;--bg2:#E8E2D5;--surface:#EAE4D8;--white:#FDFAF4;--max:800px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.4}
+nav,main,footer{position:relative;z-index:1}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2.5rem;background:rgba(240,235,224,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.nav-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:54px}
+.nav-back{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-back:hover{color:var(--em)}
+.nav-crumb{font-size:0.72rem;color:var(--muted)}
+main{padding-top:54px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 2.5rem 5rem}
+
+/* HERO */
+.hero{padding:5rem 0 3rem;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.hero-glow{position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,74,0.07),transparent 70%);pointer-events:none}
+.eyebrow{font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--em2);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.7rem}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--em3)}
+.company{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:0.3rem}
+.role-name{font-size:0.9rem;font-weight:500;color:var(--em);margin-bottom:1.5rem}
+.hero-desc{font-size:1rem;color:#3A3A30;line-height:1.85;font-weight:300;max-width:580px;margin-bottom:2rem}
+.period{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--muted)}
+
+/* IMPACT */
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--surface);margin:3rem 0}
+.imp{padding:1.8rem 1.2rem;border-right:1px solid var(--rule);position:relative;overflow:hidden;transition:background 0.3s}
+.imp:last-child{border-right:none}
+.imp:hover{background:var(--bg2)}
+.imp::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--em),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.imp:hover::after{transform:scaleX(1)}
+.imp-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--ink);line-height:1;margin-bottom:0.3rem}
+.imp-num sup{font-size:0.9rem;color:var(--em);vertical-align:super}
+.imp-label{font-size:0.7rem;color:var(--muted);line-height:1.4}
+
+/* SECTION */
+.sec{padding:3rem 0;border-bottom:1px solid var(--rule)}
+.sec:last-child{border-bottom:none}
+.sec-label{font-size:0.62rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--em2);margin-bottom:1.8rem;display:flex;align-items:center;gap:0.7rem}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--ink);margin-bottom:0.8rem}
+.body-text{font-size:0.9rem;color:#3A3A30;line-height:1.85;font-weight:300}
+.body-text p{margin-bottom:0.8rem}
+.body-text p:last-child{margin-bottom:0}
+.hi{font-weight:600;color:var(--em)}
+
+/* PIPELINE VISUAL */
+.pipe-wrap{margin:2rem 0;overflow-x:auto}
+.pipe-row{display:flex;align-items:center;gap:0;min-width:500px}
+.pipe-node{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:0.9rem 1rem;text-align:center;min-width:90px;flex:1;transition:all 0.25s;cursor:default}
+.pipe-node:hover{border-color:var(--em3);background:rgba(26,107,74,0.04);transform:translateY(-2px)}
+.pipe-node-icon{font-size:1.3rem;margin-bottom:0.3rem}
+.pipe-node-name{font-size:0.65rem;font-weight:600;color:var(--em);letter-spacing:0.06em;text-transform:uppercase}
+.pipe-node-sub{font-size:0.6rem;color:var(--muted);margin-top:0.1rem}
+.pipe-arrow{flex-shrink:0;color:var(--rule);font-size:1.1rem;margin:0 0.3rem;font-weight:300}
+.pipe-row-label{font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+.pipe-section{margin-bottom:1rem}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:1rem;padding:1.2rem 0;border-bottom:1px dashed var(--rule);opacity:0;transform:translateY(10px);transition:opacity 0.5s,transform 0.5s}
+.tl-item:last-child{border-bottom:none}
+.tl-item.vis{opacity:1;transform:translateY(0)}
+.tl-dot{flex-shrink:0;width:10px;height:10px;border-radius:50%;background:var(--em);margin-top:0.42rem}
+.tl-title{font-size:0.88rem;font-weight:600;color:var(--ink);margin-bottom:0.25rem}
+.tl-desc{font-size:0.84rem;color:#3A3A30;line-height:1.7;font-weight:300}
+
+/* QUOTE */
+.quote{background:var(--surface);border-left:3px solid var(--em);padding:1.4rem 1.6rem;border-radius:0 4px 4px 0;margin:1.5rem 0}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--ink);line-height:1.7;margin-bottom:0.4rem}
+.quote-attr{font-size:0.68rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem}
+.tag{font-size:0.74rem;background:var(--bg2);color:var(--ink);padding:0.28rem 0.65rem;border-radius:2px;border:1px solid var(--rule)}
+.tag-hi{background:rgba(26,107,74,0.08);border-color:rgba(26,107,74,0.25);color:var(--em);font-weight:500}
+.tag-gold{background:rgba(184,150,110,0.1);border-color:rgba(184,150,110,0.3);color:#7A5C30}
+.skill-group{margin-bottom:1.5rem}
+.skill-group-title{font-size:0.62rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--rule)}
+
+.back-btn{display:inline-flex;align-items:center;gap:0.5rem;margin-top:3rem;padding:0.65rem 1.4rem;background:var(--em);color:var(--white);border-radius:2px;text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s}
+.back-btn:hover{background:var(--em2)}
+footer{background:#161610;padding:1.5rem 2.5rem;text-align:center;border-top:1px solid #1C1C18;position:relative;z-index:1}
+footer p{font-size:0.68rem;color:rgba(255,255,255,0.2);letter-spacing:0.06em}
+footer a{color:rgba(255,255,255,0.3);text-decoration:none}
+@media(max-width:600px){
+  .wrap{padding:0 1.2rem 3rem}
+  .impact-grid{grid-template-columns:1fr 1fr}
+  .imp{border-bottom:1px solid var(--rule)}
+  .imp:nth-child(2n){border-right:none}
+}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<nav>
+  <div class="nav-inner">
+    <a href="pipeline.html" class="nav-back">← All Roles</a>
+    <span class="nav-crumb">Krungsri Auto · 2023–Present</span>
+  </div>
+</nav>
+<main><div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <p class="eyebrow">2023 — Present · Bangkok</p>
+  <h1 class="company">Ayudhya Capital Auto Lease PCL<br>(Krungsri Auto)</h1>
+  <div class="role-name">Senior Data Engineer · DDO Team (Data Warehouse)</div>
+  <p class="hero-desc">ดูแลระบบ Data Pipeline ของทีม DDO แบบครบวงจร ตั้งแต่ออกแบบ Architecture ไปจนถึง Deploy Production — รวมถึงระบบคำนวณ Incentive พนักงานขายที่ครอบคลุม 3 ช่องทางธุรกิจสินเชื่อยานยนต์</p>
+  <span class="period">2023 — ปัจจุบัน</span>
+</div>
+
+<!-- IMPACT -->
+<div class="impact-grid">
+  <div class="imp"><div class="imp-num">95<sup>%</sup></div><div class="imp-label">ลดเวลาประมวลผล ETL จาก ~92 นาที เหลือไม่ถึง 3 นาที</div></div>
+  <div class="imp"><div class="imp-num">90<sup>%+</sup></div><div class="imp-label">ลดจำนวนไฟล์ใน S3 Storage ประหยัดต้นทุกอย่างมีนัยสำคัญ</div></div>
+  <div class="imp"><div class="imp-num">5<sup>+</sup></div><div class="imp-label">Production Pipeline ที่รับผิดชอบตั้งแต่ต้นจนจบ</div></div>
+  <div class="imp"><div class="imp-num">3</div><div class="imp-label">ช่องทางขายที่ระบบ Incentive ครอบคลุม</div></div>
+</div>
+
+<!-- PIPELINE VISUAL -->
+<div class="sec">
+  <p class="sec-label">AWS Data Pipeline</p>
+  <div class="pipe-wrap">
+    <div class="pipe-section">
+      <div class="pipe-row-label">Main ETL Flow</div>
+      <div class="pipe-row">
+        <div class="pipe-node"><div class="pipe-node-icon">📨</div><div class="pipe-node-name">SNS/SQS</div><div class="pipe-node-sub">Event trigger</div></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-node-icon">⚡</div><div class="pipe-node-name">Lambda</div><div class="pipe-node-sub">Orchestrator</div></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-node-icon">⚙️</div><div class="pipe-node-name">AWS Glue</div><div class="pipe-node-sub">ETL · 95% faster</div></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-node-icon">🗄️</div><div class="pipe-node-name">S3</div><div class="pipe-node-sub">90% less files</div></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-node-icon">🏦</div><div class="pipe-node-name">Redshift</div><div class="pipe-node-sub">Data Warehouse</div></div>
+      </div>
+    </div>
+    <div class="pipe-section">
+      <div class="pipe-row-label">Supporting Systems</div>
+      <div class="pipe-row">
+        <div class="pipe-node"><div class="pipe-node-icon">🔷</div><div class="pipe-node-name">Oracle DB</div><div class="pipe-node-sub">Incentive logic</div></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-node-icon">🏗️</div><div class="pipe-node-name">Terraform</div><div class="pipe-node-sub">IaC full stack</div></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-node-icon">🚀</div><div class="pipe-node-name">GoCD</div><div class="pipe-node-sub">CI/CD</div></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-node-icon">📊</div><div class="pipe-node-name">Tableau</div><div class="pipe-node-sub">Exec dashboards</div></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-node-icon">💬</div><div class="pipe-node-name">MS Teams</div><div class="pipe-node-sub">Alerts</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STORY -->
+<div class="sec">
+  <p class="sec-label">สิ่งที่ทำและผลลัพธ์</p>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div><div class="tl-title">แก้ปัญหา ETL ช้า 92 นาที → 3 นาที</div><div class="tl-desc">ระบบ ETL เดิมใช้เวลานานเพราะ SQS batch sizing ผิด ทำให้ Glue Job ถูก trigger ทีละอัน แก้โดย tuning batch window + ปรับ COPY format → <span class="hi">ลด 95%</span></div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div><div class="tl-title">ออกแบบ S3 Storage ใหม่ทั้งหมด</div><div class="tl-desc">ไฟล์เล็กๆ ล้นระบบทุกวัน แก้โดยรวม micro-files เป็น hourly partition → <span class="hi">ไฟล์ลด 90%+</span> query เร็วขึ้น ต้นทุนลด</div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div><div class="tl-title">เป็นเจ้าของระบบ Incentive ครบวงจร</div><div class="tl-desc">ออกแบบ Logic คำนวณ Incentive พนักงานขายใน 3 ช่องทาง ดูแล Pipeline ตั้งแต่ Oracle → Redshift แก้ bug stored procedures และตรวจสอบความถูกต้องกับ Tableau/Cognos</div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div><div class="tl-title">สร้าง Pipeline sale_dwh_field_verification ตั้งแต่ศูนย์</div><div class="tl-desc">สร้าง Redshift DDL, Glue v1.0–v1.6 พร้อม 3 modes (full load, incremental, backfill), Lambda, และ Terraform stack ทั้งหมด</div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div><div class="tl-title">จัดการ Cross-account Architecture ระหว่าง 2 AWS Account</div><div class="tl-desc">ออกแบบ SNS/SQS subscription ข้าม account (GAMI ↔ DDO) ผ่าน Terraform รวมถึง IAM trust policy และ resource-based policy ครบ</div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div><div class="tl-title">สร้าง Executive Dashboard และ Alert System</div><div class="tl-desc">พัฒนา Tableau และ Power BI Dashboard สำหรับผู้บริหาร พร้อมระบบแจ้งเตือนผ่าน MS Teams เมื่อ Pipeline มีปัญหา</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote">
+  <div class="quote-text">"ระบบที่ดีคือระบบที่ทำงานได้เงียบๆ โดยไม่ต้องให้ใครแตะ แต่เมื่อมีปัญหา ทุกคนรู้ทันที"</div>
+  <div class="quote-attr">แนวคิดในการออกแบบ Pipeline ที่ Krungsri Auto</div>
+</div>
+
+<!-- SKILLS -->
+<div class="sec">
+  <p class="sec-label">เทคโนโลยีที่ใช้</p>
+  <div class="skill-group">
+    <div class="skill-group-title">Cloud & Infrastructure</div>
+    <div class="tags"><span class="tag tag-hi">Terraform</span><span class="tag tag-hi">AWS Glue</span><span class="tag">Lambda</span><span class="tag">SQS / SNS</span><span class="tag">Step Functions</span><span class="tag">S3</span><span class="tag">IAM</span><span class="tag">CloudWatch</span></div>
+  </div>
+  <div class="skill-group">
+    <div class="skill-group-title">Data & Databases</div>
+    <div class="tags"><span class="tag tag-hi">Redshift</span><span class="tag tag-hi">Oracle / PL-SQL</span><span class="tag">Python</span><span class="tag">PySpark</span></div>
+  </div>
+  <div class="skill-group">
+    <div class="skill-group-title">DevOps & BI</div>
+    <div class="tags"><span class="tag tag-gold">GoCD</span><span class="tag">CI/CD</span><span class="tag">Git</span><span class="tag">Tableau</span><span class="tag">Power BI</span><span class="tag">Power Automate</span><span class="tag">MS Teams</span></div>
+  </div>
+</div>
+
+<a href="pipeline.html" class="back-btn">← Back to all roles</a>
+
+</div></main>
+<footer><p>Paitoon Netirangseewatchara &nbsp;·&nbsp; <a href="index.html">Portfolio</a> &nbsp;·&nbsp; <a href="pipeline.html">All Roles</a></p></footer>
+<script>
+(function(){
+  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
+  let W,H;const p=[];
+  function r(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  r();window.addEventListener('resize',r);
+  const rn=(a,b)=>Math.random()*(b-a)+a;
+  for(let i=0;i<40;i++)p.push({x:rn(0,1),y:rn(0,1),vx:rn(-0.04,0.04)*0.28,vy:rn(-0.04,0.04)*0.28,r:rn(0.8,1.8),col:Math.random()>0.5?'#2A8A60':'#B8966E',a:rn(0.04,0.15)});
+  let m={x:0.5,y:0.5};
+  window.addEventListener('mousemove',e=>{m.x=e.clientX/W;m.y=e.clientY/H});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let q of p){q.x+=q.vx*0.003;q.y+=q.vy*0.003;const dx=q.x-m.x,dy=q.y-m.y,d=Math.sqrt(dx*dx+dy*dy);if(d<0.1){const f=0.00008/d;q.vx+=dx*f;q.vy+=dy*f}q.vx*=0.998;q.vy*=0.998;if(q.x<-0.02)q.x=1.02;if(q.x>1.02)q.x=-0.02;if(q.y<-0.02)q.y=1.02;if(q.y>1.02)q.y=-0.02;}
+    for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){const a=p[i],b=p[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<0.11){ctx.beginPath();ctx.moveTo(a.x*W,a.y*H);ctx.lineTo(b.x*W,b.y*H);ctx.strokeStyle=`rgba(42,138,96,${(1-d/0.11)*0.07})`;ctx.lineWidth=0.5;ctx.stroke()}}
+    for(let q of p){ctx.beginPath();ctx.arc(q.x*W,q.y*H,q.r,0,Math.PI*2);ctx.fillStyle=q.col;ctx.globalAlpha=q.a;ctx.fill();ctx.globalAlpha=1}
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:0.1});
+document.querySelectorAll('.tl-item').forEach((el,i)=>{el.style.transitionDelay=(i*0.1)+'s';obs.observe(el);});
+</script>
+</body>
+</html>

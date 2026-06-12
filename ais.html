@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIS — Paitoon N.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--em:#1A6B4A;--em2:#2A8A60;--em3:#3DAA78;--gold:#B8966E;--ink:#0D0D0D;--muted:#7A7A6A;--rule:#D8D2C4;--bg:#F0EBE0;--bg2:#E8E2D5;--surface:#EAE4D8;--white:#FDFAF4;--max:800px;--acc:#2A8A60}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.4}
+nav,main,footer{position:relative;z-index:1}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2.5rem;background:rgba(240,235,224,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.nav-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:54px}
+.nav-back{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-back:hover{color:var(--acc)}
+.nav-crumb{font-size:0.72rem;color:var(--muted)}
+main{padding-top:54px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 2.5rem 5rem}
+.hero{padding:5rem 0 3rem;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.hero-glow{position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,74,0.06),transparent 70%);pointer-events:none}
+.eyebrow{font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--acc);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.7rem}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--acc)}
+.company{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,4vw,2.4rem);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:0.3rem}
+.role-name{font-size:0.9rem;font-weight:500;color:var(--acc);margin-bottom:1.5rem}
+.hero-desc{font-size:1rem;color:#3A3A30;line-height:1.85;font-weight:300;max-width:580px;margin-bottom:2rem}
+.period{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--muted)}
+.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--surface);margin:3rem 0}
+.imp{padding:1.8rem 1.2rem;border-right:1px solid var(--rule);position:relative;overflow:hidden;transition:background 0.3s}
+.imp:last-child{border-right:none}
+.imp:hover{background:var(--bg2)}
+.imp::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--em),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.imp:hover::after{transform:scaleX(1)}
+.imp-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--ink);line-height:1;margin-bottom:0.3rem}
+.imp-label{font-size:0.7rem;color:var(--muted);line-height:1.4}
+.sec{padding:3rem 0;border-bottom:1px solid var(--rule)}
+.sec:last-child{border-bottom:none}
+.sec-label{font-size:0.62rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--acc);margin-bottom:1.8rem;display:flex;align-items:center;gap:0.7rem}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:0.8rem}
+.body-text{font-size:0.9rem;color:#3A3A30;line-height:1.85;font-weight:300}
+.hi{font-weight:600;color:var(--em)}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:1rem;padding:1.2rem 0;border-bottom:1px dashed var(--rule);opacity:0;transform:translateY(10px);transition:opacity 0.5s,transform 0.5s}
+.tl-item:last-child{border-bottom:none}
+.tl-item.vis{opacity:1;transform:translateY(0)}
+.tl-dot{flex-shrink:0;width:10px;height:10px;border-radius:50%;background:var(--acc);margin-top:0.42rem}
+.tl-title{font-size:0.88rem;font-weight:600;color:var(--ink);margin-bottom:0.25rem}
+.tl-desc{font-size:0.84rem;color:#3A3A30;line-height:1.7;font-weight:300}
+.quote{background:var(--surface);border-left:3px solid var(--acc);padding:1.4rem 1.6rem;border-radius:0 4px 4px 0;margin:1.5rem 0}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--ink);line-height:1.7;margin-bottom:0.4rem}
+.quote-attr{font-size:0.68rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+.tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem}
+.tag{font-size:0.74rem;background:var(--bg2);color:var(--ink);padding:0.28rem 0.65rem;border-radius:2px;border:1px solid var(--rule)}
+.tag-hi{background:rgba(26,107,74,0.08);border-color:rgba(26,107,74,0.25);color:var(--em);font-weight:500}
+.tag-gold{background:rgba(184,150,110,0.1);border-color:rgba(184,150,110,0.3);color:#7A5C30}
+.skill-group{margin-bottom:1.4rem}
+.skill-group-title{font-size:0.62rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--rule)}
+.back-btn{display:inline-flex;align-items:center;gap:0.5rem;margin-top:3rem;padding:0.65rem 1.4rem;background:var(--em);color:var(--white);border-radius:2px;text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s}
+.back-btn:hover{background:var(--em2)}
+footer{background:#161610;padding:1.5rem 2.5rem;text-align:center;border-top:1px solid #1C1C18;position:relative;z-index:1}
+footer p{font-size:0.68rem;color:rgba(255,255,255,0.2);letter-spacing:0.06em}
+footer a{color:rgba(255,255,255,0.3);text-decoration:none}
+@media(max-width:600px){.wrap{padding:0 1.2rem 3rem}.impact-grid{grid-template-columns:1fr 1fr}}</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<nav><div class="nav-inner"><a href="pipeline.html" class="nav-back">← All Roles</a><span class="nav-crumb">AIS · 2020–2021</span></div></nav>
+<main><div class="wrap">
+<div class="hero">
+  <div class="hero-glow"></div>
+  <p class="eyebrow">2020 — 2021 · Bangkok</p>
+  <h1 class="company">Advanced Info Services PCL<br>(AIS)</h1>
+  <div class="role-name">Data Engineer & Business Analyst</div>
+  <p class="hero-desc">ดูแลระบบ ETL และ Data Pipeline บน Linux Environment สำหรับ AIS — ส่งข้อมูลเข้า Data Lake อย่างถูกต้องและตรงเวลา พร้อมพัฒนา Internal Tool เพื่อลดงาน Manual และสร้าง Validation Dashboard ด้วย Tableau</p>
+  <span class="period">2020 — 2021</span>
+</div>
+<div class="impact-grid"><div class="imp"><div class="imp-num">Data Lake</div><div class="imp-label">Pipeline ส่งข้อมูลเข้า Data Lake ถูกต้อง ตรงเวลา</div></div><div class="imp"><div class="imp-num">Automated</div><div class="imp-label">ลดงาน Manual ด้วย Internal Tools</div></div><div class="imp"><div class="imp-num">Reliable</div><div class="imp-label">ระบบ Monitoring ตรวจสอบคุณภาพข้อมูลอัตโนมัติ</div></div></div>
+<div class="sec">
+  <p class="sec-label">สิ่งที่ทำและผลลัพธ์</p>
+  <div class="timeline"><div class="tl-item"><div class="tl-dot"></div><div><div class="tl-title">ETL Pipeline บน Linux Environment</div><div class="tl-desc">พัฒนากระบวนการ Extract-Transform-Load สำหรับดึงข้อมูลจากหลาย Source และโหลดเข้า Database บน Linux</div></div></div><div class="tl-item"><div class="tl-dot"></div><div><div class="tl-title">ส่งข้อมูลเข้า AIS Data Lake</div><div class="tl-desc">สร้างและดูแล Pipeline ที่ส่งข้อมูลเข้า Data Lake อย่างถูกต้อง ครบถ้วน และปลอดภัยสำหรับ Analytics</div></div></div><div class="tl-item"><div class="tl-dot"></div><div><div class="tl-title">พัฒนา Internal Tools ลดงาน Manual</div><div class="tl-desc">สร้างเครื่องมือภายในด้วย PHP, JavaScript และ Shell Script เพื่อ Automate งานที่ทำซ้ำ</div></div></div><div class="tl-item"><div class="tl-dot"></div><div><div class="tl-title">Tableau Dashboard สำหรับ Data Validation</div><div class="tl-desc">สร้าง Report ตรวจสอบคุณภาพข้อมูลใน Tableau ให้ทีม Business ตรวจสอบ Data Integrity ได้ด้วยตัวเอง</div></div></div></div>
+</div>
+<div class="quote"><div class="quote-text">"Data ที่ดีคือ Data ที่ทุกคนเชื่อถือได้ — งานของ Data Engineer คือสร้างความเชื่อมั่นนั้น"</div><div class="quote-attr">แนวคิดจากการทำงานที่ AIS</div></div>
+<div class="sec">
+  <p class="sec-label">เทคโนโลยีที่ใช้</p>
+  <div class="skill-group"><div class="skill-group-title">Data Engineering</div><div class="tags"><span class="tag tag-hi">ETL Pipeline</span><span class="tag">Data Lake</span><span class="tag">Linux</span><span class="tag">SQL</span></div></div><div class="skill-group"><div class="skill-group-title">Tools & BI</div><div class="tags"><span class="tag tag-hi">Tableau</span><span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">Shell Script</span></div></div>
+</div>
+<a href="pipeline.html" class="back-btn">← Back to all roles</a>
+</div></main>
+<footer><p>Paitoon Netirangseewatchara &nbsp;·&nbsp; <a href="index.html">Portfolio</a> &nbsp;·&nbsp; <a href="pipeline.html">All Roles</a></p></footer>
+<script>
+(function(){
+  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
+  let W,H;const p=[];
+  function r(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  r();window.addEventListener('resize',r);
+  const rn=(a,b)=>Math.random()*(b-a)+a;
+  for(let i=0;i<40;i++)p.push({x:rn(0,1),y:rn(0,1),vx:rn(-0.04,0.04)*0.28,vy:rn(-0.04,0.04)*0.28,r:rn(0.8,1.8),col:Math.random()>0.5?'#2A8A60':'#B8966E',a:rn(0.04,0.15)});
+  let m={x:0.5,y:0.5};
+  window.addEventListener('mousemove',e=>{m.x=e.clientX/W;m.y=e.clientY/H});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let q of p){q.x+=q.vx*0.003;q.y+=q.vy*0.003;const dx=q.x-m.x,dy=q.y-m.y,d=Math.sqrt(dx*dx+dy*dy);if(d<0.1){const f=0.00008/d;q.vx+=dx*f;q.vy+=dy*f}q.vx*=0.998;q.vy*=0.998;if(q.x<-0.02)q.x=1.02;if(q.x>1.02)q.x=-0.02;if(q.y<-0.02)q.y=1.02;if(q.y>1.02)q.y=-0.02;}
+    for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){const a=p[i],b=p[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<0.11){ctx.beginPath();ctx.moveTo(a.x*W,a.y*H);ctx.lineTo(b.x*W,b.y*H);ctx.strokeStyle=`rgba(42,138,96,${(1-d/0.11)*0.07})`;ctx.lineWidth=0.5;ctx.stroke()}}
+    for(let q of p){ctx.beginPath();ctx.arc(q.x*W,q.y*H,q.r,0,Math.PI*2);ctx.fillStyle=q.col;ctx.globalAlpha=q.a;ctx.fill();ctx.globalAlpha=1}
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:0.1});
+document.querySelectorAll('.tl-item').forEach((el,i)=>{el.style.transitionDelay=(i*0.1)+'s';obs.observe(el);});</script>
+</body>
+</html>

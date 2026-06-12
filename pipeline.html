@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work Experience — Paitoon N.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --emerald:#1A6B4A;--emerald-mid:#2A8A60;--emerald-light:#3DAA78;
+  --gold:#B8966E;--gold-light:#D4B896;
+  --ink:#0D0D0D;--ink2:#161610;--muted:#7A7A6A;
+  --rule:#D8D2C4;--bg:#F0EBE0;--bg2:#E8E2D5;--surface:#EAE4D8;--white:#FDFAF4;
+  --max:820px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.4}
+nav,main,footer{position:relative;z-index:1}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2.5rem;background:rgba(240,235,224,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.nav-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:54px}
+.nav-back{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-back:hover{color:var(--emerald)}
+.nav-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;letter-spacing:0.08em;color:var(--ink)}
+
+main{padding-top:54px}
+.wrap{max-width:var(--max);margin:0 auto;padding:3.5rem 2.5rem}
+
+/* PAGE HEADER */
+.page-eyebrow{font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--emerald-mid);margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem}
+.page-eyebrow::before{content:'';width:24px;height:1px;background:var(--emerald-light)}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;color:var(--ink);line-height:1.1;margin-bottom:0.5rem}
+.page-title em{font-style:italic;color:var(--emerald)}
+.page-desc{font-size:0.9rem;color:var(--muted);font-weight:300;line-height:1.75;max-width:560px;margin-bottom:3rem}
+
+/* ROLE CARD */
+.role-card{background:var(--white);border:1px solid var(--rule);border-radius:6px;margin-bottom:1.5rem;overflow:hidden;transition:box-shadow 0.2s}
+.role-card:hover{box-shadow:0 4px 24px rgba(26,107,74,0.08)}
+
+.role-top{padding:1.8rem 2rem;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.role-top:hover .role-toggle{color:var(--emerald)}
+.role-left{}
+.role-period{font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem}
+.role-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:var(--ink);margin-bottom:0.2rem}
+.role-company{font-size:0.78rem;font-weight:500;color:var(--emerald-mid);margin-bottom:0.8rem}
+.role-company-link{color:var(--emerald);text-decoration:none;border-bottom:1px solid rgba(26,107,74,0.3);transition:border-color 0.2s,color 0.2s;font-weight:600}
+.role-company-link:hover{color:var(--emerald-mid);border-color:var(--emerald)}
+.role-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.role-tag{font-size:0.68rem;font-weight:500;background:var(--surface);color:var(--ink);padding:0.2rem 0.6rem;border-radius:2px;border:1px solid var(--rule)}
+.role-toggle{font-size:1.2rem;color:var(--muted);transition:all 0.3s;flex-shrink:0;margin-top:0.2rem}
+.role-toggle.open{transform:rotate(45deg);color:var(--emerald)}
+
+/* IMPACT STRIP */
+.impact-strip{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--surface)}
+.impact-item{flex:1;min-width:140px;padding:1rem 1.4rem;border-right:1px solid var(--rule);position:relative;overflow:hidden}
+.impact-item:last-child{border-right:none}
+.impact-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--emerald),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.role-card:hover .impact-item::after{transform:scaleX(1)}
+.impact-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--ink);line-height:1}
+.impact-num sup{font-size:0.85rem;color:var(--emerald);vertical-align:super}
+.impact-label{font-size:0.72rem;color:var(--muted);line-height:1.4;margin-top:0.3rem}
+
+/* DETAIL BODY */
+.role-body{display:none;padding:0 2rem 2rem}
+.role-body.open{display:block}
+
+/* STORY FLOW */
+.story-flow{margin:1.5rem 0;display:flex;flex-direction:column;gap:0}
+.story-step{display:flex;gap:1.2rem;padding:1rem 0;border-bottom:1px solid var(--rule)}
+.story-step:last-child{border-bottom:none}
+.step-icon{flex-shrink:0;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-top:0.1rem}
+.step-icon.problem{background:#FEF0EA;color:#C44B0A}
+.step-icon.action{background:rgba(26,107,74,0.1);color:var(--emerald)}
+.step-icon.result{background:rgba(184,150,110,0.12);color:#7A5C30}
+.step-content{}
+.step-label{font-size:0.6rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+.step-text{font-size:0.88rem;color:var(--ink);line-height:1.7;font-weight:300}
+.step-highlight{font-weight:600;color:var(--emerald)}
+
+/* TECH USED */
+.tech-section{margin-top:1.2rem}
+.tech-label{font-size:0.62rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem}
+.tech-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.tech-tag{font-size:0.72rem;font-weight:400;background:var(--bg2);color:var(--ink);padding:0.25rem 0.65rem;border-radius:2px;border:1px solid var(--rule)}
+.tech-tag-hi{background:rgba(26,107,74,0.08);border-color:rgba(26,107,74,0.25);color:var(--emerald);font-weight:500}
+
+.divider{height:1px;background:linear-gradient(90deg,rgba(26,107,74,0.2),rgba(184,150,110,0.2),transparent);margin:3rem 0}
+
+footer{background:var(--ink2);padding:1.5rem 2.5rem;text-align:center;border-top:1px solid #1C1C18;position:relative;z-index:1}
+footer p{font-size:0.68rem;color:rgba(255,255,255,0.25);letter-spacing:0.06em}
+footer a{color:rgba(255,255,255,0.35);text-decoration:none}
+footer a:hover{color:var(--gold-light)}
+
+@media(max-width:600px){
+  .role-top{flex-direction:column}
+  .impact-strip{flex-direction:column}
+  .impact-item{border-right:none;border-bottom:1px solid var(--rule)}
+  .wrap{padding:2rem 1.2rem}
+}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">← Portfolio</a>
+    <div class="nav-title">Work Experience</div>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+<div class="page-eyebrow">5+ Years · 5 Roles</div>
+<h1 class="page-title">What I've Built<br><em>& Why It Matters</em></h1>
+<p class="page-desc">A plain-language summary of each role — what the problem was, what I built, and what changed as a result. Click any role to read the full story.</p>
+
+<!-- ═══ ROLE 1: KRUNGSRI AUTO ═══ -->
+<div class="role-card">
+  <div class="role-top" onclick="toggle('r1')">
+    <div class="role-left">
+      <div class="role-period">2023 — Present</div>
+      <div class="role-title">Senior Data Engineer</div>
+      <div class="role-company"><a href="krungsri.html" class="role-company-link">Ayudhya Capital Auto Lease PCL (Krungsri Auto) · DDO Team ↗</a></div>
+      <div class="role-tags">
+        <span class="role-tag">AWS</span>
+        <span class="role-tag">Redshift</span>
+        <span class="role-tag">Terraform</span>
+        <span class="role-tag">Oracle</span>
+        <span class="role-tag">GoCD</span>
+      </div>
+    </div>
+    <div class="role-toggle" id="toggle-r1">+</div>
+  </div>
+
+  <div class="impact-strip">
+    <div class="impact-item">
+      <div class="impact-num">95<sup>%</sup></div>
+      <div class="impact-label">ลดเวลาประมวลผลข้อมูล จากชั่วโมงเหลือ 3 นาที</div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-num">90<sup>%+</sup></div>
+      <div class="impact-label">ลดจำนวนไฟล์ใน Storage ประหยัดต้นทุน</div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-num">3</div>
+      <div class="impact-label">ช่องทางขายที่ดูแลระบบคำนวณ Incentive ครบวงจร</div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-num">5<sup>+</sup></div>
+      <div class="impact-label">Pipeline ที่รับผิดชอบตั้งแต่ออกแบบจนถึง Production</div>
+    </div>
+  </div>
+
+  <div class="role-body" id="body-r1">
+    <div class="story-flow">
+      <div class="story-step">
+        <div class="step-icon problem">⚠</div>
+        <div class="step-content">
+          <div class="step-label">ปัญหา</div>
+          <div class="step-text">ระบบคำนวณ Incentive ของพนักงานขายใน 3 ช่องทางธุรกิจสินเชื่อยานยนต์ใช้เวลาประมวลผลนานถึง <span class="step-highlight">~92 นาทีต่อรอบ</span> และมีไฟล์ข้อมูลสะสมจำนวนมากจนทำให้ระบบช้า ต้นทุน Storage สูง และรายงานล่าช้า</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon action">⚙</div>
+        <div class="step-content">
+          <div class="step-label">สิ่งที่ทำ</div>
+          <div class="step-text">ออกแบบและสร้าง Data Pipeline ใหม่บน AWS ตั้งแต่ต้น — ปรับปรุงการทำงานของ AWS Glue ETL, แก้ปัญหา SQS batch sizing ที่ทำให้ระบบ trigger ซ้ำซ้อน, ออกแบบ S3 Storage ใหม่โดยรวมไฟล์เล็กๆ เข้าด้วยกันเป็น partition รายชั่วโมง, และสร้าง Infrastructure ทั้งหมดด้วย Terraform เพื่อให้ Deploy และจัดการได้ง่าย</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon result">✓</div>
+        <div class="step-content">
+          <div class="step-label">ผลลัพธ์</div>
+          <div class="step-text">เวลาประมวลผลลดลง <span class="step-highlight">95%</span> เหลือไม่ถึง 3 นาที, จำนวนไฟล์ใน S3 ลดลงกว่า <span class="step-highlight">90%</span> ประหยัดต้นทุนอย่างมีนัยสำคัญ, ทีมงานและผู้บริหารได้รับ Dashboard real-time ผ่าน Tableau และ Power BI, และระบบสามารถขยายรองรับการเติบโตได้โดยไม่ต้องแก้โค้ด</div>
+        </div>
+      </div>
+    </div>
+    <div class="tech-section">
+      <div class="tech-label">เทคโนโลยีที่ใช้</div>
+      <div class="tech-tags">
+        <span class="tech-tag tech-hi">AWS Glue</span>
+        <span class="tech-tag tech-hi">Terraform</span>
+        <span class="tech-tag tech-hi">Redshift</span>
+        <span class="tech-tag">Lambda</span>
+        <span class="tech-tag">SQS / SNS</span>
+        <span class="tech-tag">S3</span>
+        <span class="tech-tag">Oracle PL-SQL</span>
+        <span class="tech-tag">GoCD</span>
+        <span class="tech-tag">Tableau</span>
+        <span class="tech-tag">Power BI</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROLE 2: PTTGC ═══ -->
+<div class="role-card">
+  <div class="role-top" onclick="toggle('r2')">
+    <div class="role-left">
+      <div class="role-period">2022 — 2023</div>
+      <div class="role-title">Senior Data Engineer</div>
+      <div class="role-company"><a href="pttgc.html" class="role-company-link">PTT Global Chemical Public Company Limited (PTTGC) ↗</a></div>
+      <div class="role-tags">
+        <span class="role-tag">Data Pipeline</span>
+        <span class="role-tag">Integration</span>
+        <span class="role-tag">Business Analysis</span>
+      </div>
+    </div>
+    <div class="role-toggle" id="toggle-r2">+</div>
+  </div>
+
+  <div class="impact-strip">
+    <div class="impact-item">
+      <div class="impact-num">E2E</div>
+      <div class="impact-label">ออกแบบ Pipeline ครบตั้งแต่ต้นจนจบ</div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-num">100<sup>%</sup></div>
+      <div class="impact-label">ความถูกต้องของข้อมูลหลัง Execution</div>
+    </div>
+  </div>
+
+  <div class="role-body" id="body-r2">
+    <div class="story-flow">
+      <div class="story-step">
+        <div class="step-icon problem">⚠</div>
+        <div class="step-content">
+          <div class="step-label">ปัญหา</div>
+          <div class="step-text">ทีม Business ของ PTTGC มีความต้องการข้อมูลที่ซับซ้อน แต่ยากที่จะสื่อสารกับทีม Technical ทำให้ Pipeline ที่สร้างขึ้นมักไม่ตรงกับ Business Logic จริง</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon action">⚙</div>
+        <div class="step-content">
+          <div class="step-label">สิ่งที่ทำ</div>
+          <div class="step-text">ทำหน้าที่เป็นสะพานเชื่อมระหว่างทีม Business และ Technical — แปลง Business Requirement ให้เป็น Logic-based data flow, ออกแบบ Pipeline ให้ข้อมูลไหลได้ถูกต้องตาม Business Process และทำ Impact Analysis หลังการ Execute เพื่อยืนยันความถูกต้อง</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon result">✓</div>
+        <div class="step-content">
+          <div class="step-label">ผลลัพธ์</div>
+          <div class="step-text">Pipeline ที่ส่งมอบตรงตาม Business Objective ของ PTTGC ข้อมูลมีความถูกต้องและสอดคล้องกับกระบวนการทางธุรกิจจริง ลด Gap ระหว่างทีม Business และ Technical</div>
+        </div>
+      </div>
+    </div>
+    <div class="tech-section">
+      <div class="tech-label">เทคโนโลยีที่ใช้</div>
+      <div class="tech-tags">
+        <span class="tech-tag">Data Pipeline Design</span>
+        <span class="tech-tag">ETL</span>
+        <span class="tech-tag">Business Analysis</span>
+        <span class="tech-tag">Impact Analysis</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROLE 3: PTG ENERGY ═══ -->
+<div class="role-card">
+  <div class="role-top" onclick="toggle('r3')">
+    <div class="role-left">
+      <div class="role-period">2021 — 2022</div>
+      <div class="role-title">Data Engineer & Business Analyst</div>
+      <div class="role-company"><a href="ptgenergy.html" class="role-company-link">Extend IT Resource · Vendor PTG Energy PCL ↗</a></div>
+      <div class="role-tags">
+        <span class="role-tag">Talend</span>
+        <span class="role-tag">Hadoop</span>
+        <span class="role-tag">Spark</span>
+        <span class="role-tag">Snowflake</span>
+        <span class="role-tag">ELK Stack</span>
+      </div>
+    </div>
+    <div class="role-toggle" id="toggle-r3">+</div>
+  </div>
+
+  <div class="impact-strip">
+    <div class="impact-item">
+      <div class="impact-num">10<sup>+</sup></div>
+      <div class="impact-label">Talend Certification ที่ได้รับ</div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-num">Real-time</div>
+      <div class="impact-label">ระบบ Ingest ข้อมูลแบบ Real-time ด้วย ELK Stack</div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-num">Big Data</div>
+      <div class="impact-label">สถาปัตยกรรม Big Data สำหรับองค์กรขนาดใหญ่</div>
+    </div>
+  </div>
+
+  <div class="role-body" id="body-r3">
+    <div class="story-flow">
+      <div class="story-step">
+        <div class="step-icon problem">⚠</div>
+        <div class="step-content">
+          <div class="step-label">ปัญหา</div>
+          <div class="step-text">PTG Energy มีข้อมูลจำนวนมากจากหลาย Source แต่ขาดสถาปัตยกรรมที่รองรับการประมวลผลข้อมูลขนาดใหญ่ได้อย่างมีประสิทธิภาพ และต้องการระบบที่มองเห็นข้อมูลแบบ Real-time</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon action">⚙</div>
+        <div class="step-content">
+          <div class="step-label">สิ่งที่ทำ</div>
+          <div class="step-text">ออกแบบ Big Data Architecture โดยใช้ Talend, Hadoop, Spark และ Snowflake สำหรับการประมวลผลข้อมูลขนาดใหญ่, สร้าง Real-time Pipeline ด้วย ELK Stack (Elasticsearch, Logstash, Kibana), พัฒนา Talend Data Management Platform สำหรับ Data Governance ระดับองค์กร และดำเนินโครงการ Data Migration ขนาดใหญ่</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon result">✓</div>
+        <div class="step-content">
+          <div class="step-label">ผลลัพธ์</div>
+          <div class="step-text">PTG Energy มีสถาปัตยกรรม Big Data ที่รองรับการขยายตัว, ข้อมูล Real-time พร้อมใช้งานผ่าน Kibana Dashboard, และ Data Quality มีมาตรฐานชัดเจนด้วย Rule Specification ที่จัดทำขึ้น ระหว่างนี้ยังได้รับ <span class="step-highlight">Talend Certification ครบ 10+ Module</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="tech-section">
+      <div class="tech-label">เทคโนโลยีที่ใช้</div>
+      <div class="tech-tags">
+        <span class="tech-tag tech-hi">Talend</span>
+        <span class="tech-tag tech-hi">Snowflake</span>
+        <span class="tech-tag">Hadoop</span>
+        <span class="tech-tag">Apache Spark</span>
+        <span class="tech-tag">Elasticsearch</span>
+        <span class="tech-tag">Logstash</span>
+        <span class="tech-tag">Kibana</span>
+        <span class="tech-tag">ETL Migration</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROLE 4: AIS ═══ -->
+<div class="role-card">
+  <div class="role-top" onclick="toggle('r4')">
+    <div class="role-left">
+      <div class="role-period">2020 — 2021</div>
+      <div class="role-title">Data Engineer & Business Analyst</div>
+      <div class="role-company"><a href="ais.html" class="role-company-link">Advanced Info Services PCL (AIS) ↗</a></div>
+      <div class="role-tags">
+        <span class="role-tag">ETL</span>
+        <span class="role-tag">Data Lake</span>
+        <span class="role-tag">Linux</span>
+        <span class="role-tag">Tableau</span>
+      </div>
+    </div>
+    <div class="role-toggle" id="toggle-r4">+</div>
+  </div>
+
+  <div class="impact-strip">
+    <div class="impact-item">
+      <div class="impact-num">Data Lake</div>
+      <div class="impact-label">ระบบ Pipeline ส่งข้อมูลเข้า Data Lake อย่างถูกต้อง ตรงเวลา</div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-num">Reliable</div>
+      <div class="impact-label">ระบบ Monitoring & Validation ตรวจสอบคุณภาพข้อมูลอัตโนมัติ</div>
+    </div>
+  </div>
+
+  <div class="role-body" id="body-r4">
+    <div class="story-flow">
+      <div class="story-step">
+        <div class="step-icon problem">⚠</div>
+        <div class="step-content">
+          <div class="step-label">ปัญหา</div>
+          <div class="step-text">AIS ต้องการระบบที่ดึงข้อมูลจากหลายแหล่งและส่งเข้า Data Lake อย่างถูกต้องและตรงเวลา พร้อมระบบตรวจสอบคุณภาพข้อมูลที่ทีม Business เข้าใจได้</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon action">⚙</div>
+        <div class="step-content">
+          <div class="step-label">สิ่งที่ทำ</div>
+          <div class="step-text">พัฒนา ETL Process บน Linux Environment สำหรับดึงและโหลดข้อมูลเข้า Database, สร้าง Pipeline ส่งข้อมูลเข้า Data Lake, พัฒนา Internal Tool ด้วย PHP, JavaScript และ Shell Script เพื่อลดงาน Manual และสร้าง Validation Report ด้วย Tableau</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon result">✓</div>
+        <div class="step-content">
+          <div class="step-label">ผลลัพธ์</div>
+          <div class="step-text">ทีม Analytics ของ AIS มีข้อมูลที่ถูกต้อง ครบถ้วน พร้อมใช้งานใน Data Lake, ทีม Business สามารถตรวจสอบคุณภาพข้อมูลได้ด้วยตัวเองผ่าน Tableau Dashboard</div>
+        </div>
+      </div>
+    </div>
+    <div class="tech-section">
+      <div class="tech-label">เทคโนโลยีที่ใช้</div>
+      <div class="tech-tags">
+        <span class="tech-tag tech-hi">ETL Pipeline</span>
+        <span class="tech-tag">Data Lake</span>
+        <span class="tech-tag">Linux</span>
+        <span class="tech-tag">Tableau</span>
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">Shell Script</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROLE 5: GBDi ═══ -->
+<div class="role-card">
+  <div class="role-top" onclick="toggle('r5')">
+    <div class="role-left">
+      <div class="role-period">2020 (Internship)</div>
+      <div class="role-title">Data Scientist & Analytics Intern</div>
+      <div class="role-company"><a href="gbdi.html" class="role-company-link">Government Big Data Institute (GBDi) ↗</a></div>
+      <div class="role-tags">
+        <span class="role-tag">Tableau</span>
+        <span class="role-tag">Power BI</span>
+        <span class="role-tag">Data Modeling</span>
+        <span class="role-tag">KPI Dashboard</span>
+      </div>
+    </div>
+    <div class="role-toggle" id="toggle-r5">+</div>
+  </div>
+
+  <div class="impact-strip">
+    <div class="impact-item">
+      <div class="impact-num">KPI</div>
+      <div class="impact-label">Dashboard แสดง KPI สำหรับหน่วยงานรัฐหลายแห่ง</div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-num">Cross</div>
+      <div class="impact-label">ทำงานร่วมกับทีม Cross-functional หลายกลุ่ม</div>
+    </div>
+  </div>
+
+  <div class="role-body" id="body-r5">
+    <div class="story-flow">
+      <div class="story-step">
+        <div class="step-icon problem">⚠</div>
+        <div class="step-content">
+          <div class="step-label">ปัญหา</div>
+          <div class="step-text">หน่วยงานรัฐต้องการเครื่องมือที่ช่วยให้ผู้บริหารเห็น KPI และ Performance ของโครงการต่างๆ ได้อย่างชัดเจนและรวดเร็ว</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon action">⚙</div>
+        <div class="step-content">
+          <div class="step-label">สิ่งที่ทำ</div>
+          <div class="step-text">ออกแบบ Interactive Dashboard แสดง KPI และ Performance Trend ด้วย Tableau และ Power BI, สนับสนุน Data Model และ Business Analysis เพื่อให้ข้อมูลถูกต้องตาม KPI Framework ของแต่ละโครงการ</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-icon result">✓</div>
+        <div class="step-content">
+          <div class="step-label">ผลลัพธ์</div>
+          <div class="step-text">ผู้บริหารหน่วยงานรัฐมี Dashboard ที่ใช้งานง่าย สามารถติดตาม KPI ได้แบบ Real-time, ประสบการณ์นี้เป็นจุดเริ่มต้นสำคัญของเส้นทาง Data Engineering ที่ต่อยอดมาจนถึงปัจจุบัน</div>
+        </div>
+      </div>
+    </div>
+    <div class="tech-section">
+      <div class="tech-label">เทคโนโลยีที่ใช้</div>
+      <div class="tech-tags">
+        <span class="tech-tag tech-hi">Tableau</span>
+        <span class="tech-tag tech-hi">Power BI</span>
+        <span class="tech-tag">Data Modeling</span>
+        <span class="tech-tag">KPI Framework</span>
+        <span class="tech-tag">Business Analysis</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div></main>
+
+<footer>
+  <p>Paitoon Netirangseewatchara &nbsp;·&nbsp; Senior Data Engineer &nbsp;·&nbsp; <a href="index.html">← Back to portfolio</a></p>
+</footer>
+
+<script>
+// Particle bg
+(function(){
+  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
+  let W,H;const p=[];
+  function r(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  r();window.addEventListener('resize',r);
+  const rn=(a,b)=>Math.random()*(b-a)+a;
+  for(let i=0;i<45;i++)p.push({x:rn(0,1),y:rn(0,1),vx:rn(-0.04,0.04)*0.28,vy:rn(-0.04,0.04)*0.28,r:rn(0.8,1.8),col:Math.random()>0.5?'#2A8A60':'#B8966E',a:rn(0.05,0.18)});
+  let m={x:0.5,y:0.5};
+  window.addEventListener('mousemove',e=>{m.x=e.clientX/W;m.y=e.clientY/H});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let q of p){
+      q.x+=q.vx*0.003;q.y+=q.vy*0.003;
+      const dx=q.x-m.x,dy=q.y-m.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<0.1){const f=0.00008/d;q.vx+=dx*f;q.vy+=dy*f}
+      q.vx*=0.998;q.vy*=0.998;
+      if(q.x<-0.02)q.x=1.02;if(q.x>1.02)q.x=-0.02;
+      if(q.y<-0.02)q.y=1.02;if(q.y>1.02)q.y=-0.02;
+    }
+    for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){
+      const a=p[i],b=p[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<0.11){ctx.beginPath();ctx.moveTo(a.x*W,a.y*H);ctx.lineTo(b.x*W,b.y*H);ctx.strokeStyle=`rgba(42,138,96,${(1-d/0.11)*0.07})`;ctx.lineWidth=0.5;ctx.stroke()}
+    }
+    for(let q of p){ctx.beginPath();ctx.arc(q.x*W,q.y*H,q.r,0,Math.PI*2);ctx.fillStyle=q.col;ctx.globalAlpha=q.a;ctx.fill();ctx.globalAlpha=1}
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+function toggle(id){
+  const body=document.getElementById('body-'+id);
+  const tog=document.getElementById('toggle-'+id);
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  tog.classList.toggle('open',!isOpen);
+}
+</script>
+</body>
+</html>
