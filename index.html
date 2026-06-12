@@ -30,7 +30,7 @@ nav ul a:hover{color:var(--emerald)}
 
 /* DROPDOWN */
 .nav-dd{position:relative;list-style:none}
-.nav-dd-btn{font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color 0.25s;white-space:nowrap;user-select:none}
+.nav-dd-btn{font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color 0.25s;white-space:nowrap;text-decoration:none;display:inline-block}
 .nav-dd:hover .nav-dd-btn{color:var(--emerald)}
 .nav-dd-menu{
   position:absolute;top:calc(100% + 12px);left:50%;
@@ -233,9 +233,8 @@ footer p{font-size:0.7rem;color:#3A3A34;letter-spacing:0.06em}
     <a href="#hero" class="logo">Paitoon <em>N.</em></a>
     <ul>
       <li><a href="#impact">Impact</a></li>
-      <li><a href="#experience">Experience</a></li>
       <li class="nav-dd">
-        <span class="nav-dd-btn">Work ▾</span>
+        <a href="#experience" class="nav-dd-btn">Experience ▾</a>
         <div class="nav-dd-menu">
           <a href="krungsri.html"><span class="dd-name">Krungsri Auto</span><span class="dd-year">2023–Now</span></a>
           <a href="pttgc.html"><span class="dd-name">PTTGC</span><span class="dd-year">2022–2023</span></a>
@@ -294,6 +293,7 @@ footer p{font-size:0.7rem;color:#3A3A34;letter-spacing:0.06em}
 <!-- EXPERIENCE -->
 <div id="experience" class="section">
   <p class="section-label">Experience</p>
+  <p style="font-size:0.88rem;color:var(--muted);font-weight:300;margin-bottom:2rem;line-height:1.7">กดที่แต่ละ role เพื่ออ่านรายละเอียด — ปัญหา, สิ่งที่ทำ, และผลลัพธ์</p>
 
   <!-- ─── KRUNGSRI AUTO ─── -->
   <div class="job-card">
